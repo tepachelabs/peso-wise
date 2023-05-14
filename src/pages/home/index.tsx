@@ -1,20 +1,25 @@
+import { ReactElement } from 'react';
+
+import { useSession } from 'next-auth/react';
+
+import { Layout } from '@/components/layout';
+
 const Home = () => {
   const session = useSession();
 
-  if (!session.data) {
-    return null;
-  }
-
   return(
     <>
-      <MenuAppBar />
-      <h1>Welcome {session.data.user?.name}!</h1>
+      <h1>Welcome {session.data?.user?.name}!</h1>
     </>
 )
 };
 
-import { useSession } from 'next-auth/react';
-
-import { MenuAppBar } from '@/components/navbar';
+Home.getLayout = (page: ReactElement) => {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  )
+}
 
 export default Home;

@@ -1,4 +1,7 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+
+import { signIn, useSession } from 'next-auth/react';
 
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -7,6 +10,12 @@ import Typography from '@mui/material/Typography';
 import GOOGLE_ICON from '@/icons/google.svg';
 
 const Login = () => {
+  const router = useRouter();
+  const session = useSession();
+
+  if (session.data) {
+    router.push('/home')
+  }
 
   return (
     <Grid
@@ -27,6 +36,7 @@ const Login = () => {
           Continue with Google!
         </Typography>
         <Button
+          onClick={() => signIn('google')}
           sx={{
             borderRadius: 1,
             borderStyle: 'solid',

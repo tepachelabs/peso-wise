@@ -54,7 +54,7 @@ const Login = () => {
             fontWeight={700}
             ml={1}
           >
-            Login With Google
+            Login In With Google
           </Typography>
         </Button>
 

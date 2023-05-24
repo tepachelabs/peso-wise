@@ -12,9 +12,29 @@ datasource db {
   shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
 }
 
+model User {
+  id            String          @id @default(cuid())
+  name          String
+  email         String
+  expenses      Expense[]
+  PaymentMethod PaymentMethod[]
+}
+
 model Expense {
-  id       Int     @id @default(autoincrement())
-  title    String
-  amount   Decimal
-  currency String  @default("MXN")
+  id              String        @id @default(cuid())
+  title           String
+  amount          Decimal
+  currency        String        @default("MXN")
+  User            User?         @relation(fields: [userId], references: [id])
+  userId          String?
+  PaymentMethod   PaymentMethod @relation(fields: [paymentMethodId], references: [id])
+  paymentMethodId String
+}
+
+model PaymentMethod {
+  id       String    @id @default(cuid())
+  name     String
+  expenses Expense[]
+  User     User?     @relation(fields: [userId], references: [id])
+  userId   String?
 }

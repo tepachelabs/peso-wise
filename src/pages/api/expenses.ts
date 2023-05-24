@@ -10,20 +10,30 @@ export const handler = async (
   const {
     title = '',
     amount = 0,
-    currency = 'MXN'
+    currency = 'MXN',
+    paymentMethodId,
+    userId
   } = req.body;
 
-  const newExpense = await prisma.expense.create({
-    data: {
-      amount,
-      currency,
-      title
-    }
-  });
+  try {
+    const newExpense = await prisma.expense.create({
+      data: {
+        amount,
+        currency,
+        title,
+        paymentMethodId,
+        userId,
+      },
+    });
 
-  const expenses = await prisma.expense.findMany();
+    const expenses = await prisma.expense.findMany();
 
-  res.status(200).json(expenses);
+    res.status(201).json(expenses);
+  } catch (error) {
+    res.status(400).json({
+      error,
+    });
+  }
 };
 
 export default handler;

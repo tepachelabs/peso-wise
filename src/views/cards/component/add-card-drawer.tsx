@@ -7,19 +7,18 @@ import {
   Button,
   TextField,
   Typography,
-  Autocomplete,
   InputAdornment,
 } from '@mui/material';
 
 // ** MUI Icons
-import { AttachMoney, ReceiptLong, CreditCard } from '@mui/icons-material';
+import { CreditCard } from '@mui/icons-material';
 
 interface Props {
   open: boolean;
   toggleOpen: () => void;
 }
 
-export const AddExpenseDrawer: FC<Props>= ({ toggleOpen, open }) => {
+export const AddCardDrawer: FC<Props>= ({ toggleOpen, open }) => {
 
   const handleClose = () => {
     toggleOpen();
@@ -42,37 +41,16 @@ export const AddExpenseDrawer: FC<Props>= ({ toggleOpen, open }) => {
       </Box>
       <Box sx={{ p: 3 }}>
         <TextField
+          sx={{ width: '100%', mb: 2}}
+          placeholder="Nombre de la tarjeta"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <ReceiptLong />
-              </InputAdornment>
-            )
-          }}
-          sx={{ width: '100%', mb: 2}}
-          placeholder="Nombre del gasto"
-        />
-        <TextField
-          sx={{ width: '100%', mb: 2}}
-          type="number"
-          placeholder="Cantidad"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <AttachMoney />
+                <CreditCard />
               </InputAdornment>
             ),
             endAdornment: null,
           }}
-        />
-        <Autocomplete
-          disablePortal
-          id="credit-card"
-          options={['AMEX', 'BBVA', 'HSBC']}
-          sx={{ width: '100%', mb: 2 }}
-          renderInput={(params) => (
-            <TextField {...params} label="Movie" />
-          )}
         />
         <Button sx={{ mr: 2}} onClick={handleClose} variant="contained">
           Save

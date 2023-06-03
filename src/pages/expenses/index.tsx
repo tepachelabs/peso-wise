@@ -1,20 +1,18 @@
 import { ReactElement, useState } from 'react';
 
 import {
-  Card,
   Box,
   Button,
-  Divider,
-  CardHeader,
+  Typography,
 } from '@mui/material';
 
-import SendIcon from '@mui/icons-material/Add';
+import { Add } from '@mui/icons-material';
 
 import { Layout } from '@/components/layout';
 import { DataGrid } from '@mui/x-data-grid';
 
 import { rows, columns } from '@/views/expenses/columns';
-import { AddExpenseDrawer } from '@/views/expenses/add-expense-drawer';
+import { AddExpenseDrawer } from '@/views/expenses/components/add-expense-drawer';
 
 const Expenses = () => {
   const [open, setOpen] = useState(false);
@@ -24,21 +22,25 @@ const Expenses = () => {
   }
 
   return (
-    <Card>
-      <Box sx={{ p: 2, display: 'flex', justifyContent: 'space-between'}}>
-        <CardHeader sx={{ p: 0 }} title="Gastos"/>
+    <Box>
+      <Box sx={{ p: 2, px: 0, display: 'flex', justifyContent: 'space-between'}}>
+        <Typography component="h2" variant="h5">
+          Tus Gastos
+        </Typography>
         <Box>
-          <Button onClick={toggleOpen} startIcon={<SendIcon />} variant="contained">
+          <Button onClick={toggleOpen} startIcon={<Add />} variant="contained">
             Agregar
           </Button>
         </Box>
       </Box>
       <DataGrid
+        autoHeight
         rows={rows}
         columns={columns}
+        disableSelectionOnClick
       />
       <AddExpenseDrawer open={open} toggleOpen={toggleOpen} />
-    </Card>
+    </Box>
   )
 }
 

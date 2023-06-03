@@ -25,8 +25,28 @@ export const rows = [
 ];
 
 export const columns: GridColDef [] = [
-  { field: 'name', headerName: 'Nombre', flex: 0.2,},
-  { field: 'amount', headerName: 'Cantidad', flex: 0.2, },
-  { field: 'date', headerName: 'Fecha', flex: 0.2, },
-  { field: 'card', headerName: 'Tarjeta', flex: 0.2, },
+  {
+    field: 'name',
+    headerName: 'Nombre',
+    flex: 0.2,
+    valueGetter: ({ row }) => row.name,
+  },
+  {
+    field: 'amount',
+    headerName: 'Cantidad',
+    flex: 0.2,
+    valueGetter: ({ row }) => row.amount,
+  },
+  {
+    field: 'date',
+    headerName: 'Fecha',
+    flex: 0.2,
+    valueGetter: ({ row }) => row.date,
+  },
+  {
+    field: 'card',
+    headerName: 'Tarjeta',
+    flex: 0.2,
+    valueGetter: ({ row }) => row.card,
+  },
 ];

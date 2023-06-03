@@ -1,15 +1,12 @@
-import { AuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import { PrismaAdapter, } from "@auth/prisma-adapter";
 
-import { User  } from '@/models/user';
+import { PrismaClient } from "@prisma/client";
 
-export const authOptions: AuthOptions = {
-  events: {
-    signIn: async ({ user}) => {
-      const newUser = new User();
-      await newUser.create(user.name ?? 'John', user.email ?? 'idk@gmail.com')
-    },
-  },
+const prisma = new PrismaClient();
+
+export const authOptions = {
+  adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,

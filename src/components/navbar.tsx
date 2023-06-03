@@ -57,7 +57,7 @@ const DrawerContent: FC<DrawerContentProps> = ({ toggleDrawer }) => {
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <ListItemText primary="Home" />
+            <ListItemText primary="Inicio" />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -65,7 +65,7 @@ const DrawerContent: FC<DrawerContentProps> = ({ toggleDrawer }) => {
             <ListItemIcon>
               <AttachMoneyIcon />
             </ListItemIcon>
-            <ListItemText primary="Expenses" />
+            <ListItemText primary="Gastos" />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -73,7 +73,7 @@ const DrawerContent: FC<DrawerContentProps> = ({ toggleDrawer }) => {
             <ListItemIcon>
               <CreditCardIcon />
             </ListItemIcon>
-            <ListItemText primary="Cards" />
+            <ListItemText primary="Tarjetas" />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -81,7 +81,7 @@ const DrawerContent: FC<DrawerContentProps> = ({ toggleDrawer }) => {
             <ListItemIcon>
               <SettingsIcon />
             </ListItemIcon>
-            <ListItemText primary="Settings" />
+            <ListItemText primary="Configuracion" />
           </ListItemButton>
         </ListItem>
       </List>

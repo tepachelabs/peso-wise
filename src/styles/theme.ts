@@ -1,6 +1,14 @@
 import { createTheme } from '@mui/material/styles';
 
+import '@fontsource/poppins/300.css';
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/500.css';
+import '@fontsource/poppins/700.css';
+
 export const theme = createTheme({
+  typography: {
+    fontFamily: 'Poppins, sans-serif',
+  },
   palette: {
     primary: {
       main: '#212121',
@@ -21,6 +29,9 @@ export const theme = createTheme({
     success: {
       main: '#9E9E9E',
       contrastText: '#FFFFFF',
+    },
+    background: {
+      default: '#F5F5F5',
     },
   },
 });

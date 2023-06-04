@@ -1,6 +1,7 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
 
 // ** Third Party Imports
+import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 
 // ** MUI Components
@@ -8,7 +9,6 @@ import { Box } from '@mui/material';
 
 // ** Components Imports
 import { MenuAppBar } from '@/components/navbar';
-import { useRouter } from 'next/router';
 
 interface Props {
   children: ReactNode;

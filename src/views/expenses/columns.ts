@@ -33,7 +33,7 @@ export const columns: GridColDef [] = [
   },
   {
     field: 'amount',
-    headerName: 'Cantidad',
+    headerName: 'Precio',
     flex: 0.2,
     valueGetter: ({ row }) => row.amount,
   },

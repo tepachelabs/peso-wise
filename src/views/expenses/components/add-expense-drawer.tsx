@@ -55,7 +55,7 @@ export const AddExpenseDrawer: FC<Props>= ({ toggleOpen, open }) => {
         <TextField
           sx={{ width: '100%', mb: 2}}
           type="number"
-          placeholder="Cantidad"
+          placeholder="Precio"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -75,10 +75,10 @@ export const AddExpenseDrawer: FC<Props>= ({ toggleOpen, open }) => {
           )}
         />
         <Button sx={{ mr: 2}} onClick={handleClose} variant="contained">
-          Save
+          Guardar
         </Button>
         <Button onClick={handleClose} variant="outlined">
-          Cancel
+          Cancelar
         </Button>
       </Box>
     </Drawer>

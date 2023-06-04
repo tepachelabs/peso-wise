@@ -53,10 +53,10 @@ export const AddCardDrawer: FC<Props>= ({ toggleOpen, open }) => {
           }}
         />
         <Button sx={{ mr: 2}} onClick={handleClose} variant="contained">
-          Save
+          Guardar
         </Button>
         <Button onClick={handleClose} variant="outlined">
-          Cancel
+          Cancelar
         </Button>
       </Box>
     </Drawer>

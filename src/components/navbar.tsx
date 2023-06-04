@@ -24,12 +24,15 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemButton from '@mui/material/ListItemButton';
 
-import MenuIcon from '@mui/icons-material/Menu';
-import HomeIcon from '@mui/icons-material/Home';
-import SettingsIcon from '@mui/icons-material/Settings';
-import CreditCardIcon from '@mui/icons-material/CreditCard';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import {
+  Menu as MenuIcon,
+  Home,
+  Settings,
+  CreditCard,
+  AccountCircle,
+  AttachMoney,
+  Logout,
+} from '@mui/icons-material';
 
 import { urls } from '@/utils/constants';
 
@@ -55,7 +58,7 @@ const DrawerContent: FC<DrawerContentProps> = ({ toggleDrawer }) => {
         <ListItem disablePadding>
           <ListItemButton onClick={() => navigateTo(urls.home)}>
             <ListItemIcon>
-              <HomeIcon />
+              <Home />
             </ListItemIcon>
             <ListItemText primary="Inicio" />
           </ListItemButton>
@@ -63,7 +66,7 @@ const DrawerContent: FC<DrawerContentProps> = ({ toggleDrawer }) => {
         <ListItem disablePadding>
           <ListItemButton onClick={() => navigateTo(urls.expenses)}>
             <ListItemIcon>
-              <AttachMoneyIcon />
+              <AttachMoney />
             </ListItemIcon>
             <ListItemText primary="Gastos" />
           </ListItemButton>
@@ -71,7 +74,7 @@ const DrawerContent: FC<DrawerContentProps> = ({ toggleDrawer }) => {
         <ListItem disablePadding>
           <ListItemButton onClick={() => navigateTo(urls.cards)}>
             <ListItemIcon>
-              <CreditCardIcon />
+              <CreditCard />
             </ListItemIcon>
             <ListItemText primary="Tarjetas" />
           </ListItemButton>
@@ -79,7 +82,7 @@ const DrawerContent: FC<DrawerContentProps> = ({ toggleDrawer }) => {
         <ListItem disablePadding>
           <ListItemButton onClick={() => navigateTo(urls.settings)}>
             <ListItemIcon>
-              <SettingsIcon />
+              <Settings />
             </ListItemIcon>
             <ListItemText primary="Configuracion" />
           </ListItemButton>
@@ -148,33 +151,14 @@ export const MenuAppBar = () => {
                   {session.data?.user?.name}
                 </Typography>
                 <IconButton
-                  size='large'
-                  aria-label='account of current user'
-                  aria-controls='menu-appbar'
-                  aria-haspopup='true'
-                  onClick={handleMenu}
-                  color='inherit'
+                  sx={{
+                    color: theme => theme.palette.primary.contrastText
+                  }}
+                  onClick={handleLogout}
                 >
-                  <AccountCircle />
+                  <Logout />
                 </IconButton>
               </Stack>
-              <Menu
-                id='menu-appbar'
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-              </Menu>
             </div>
           )}
         </Toolbar>

@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useState, useEffect } from 'react';
 
 // ** MUI Components
 import {
@@ -17,15 +17,25 @@ import { Layout } from '@/components/layout';
 // ** Component Imports
 import { AddCardDrawer } from '@/views/cards/component/add-card-drawer';
 
-// ** Columm Import
-import { columns, rows } from '@/views/cards/columns';
+// ** Column Import
+import { columns } from '@/views/cards/columns';
+
+// ** API
+import { fetchCards } from '@/views/cards/api'
 
 const Cards = () => {
   const [open, setOpen] = useState(false);
+  const [cards, setCards] = useState([]);
 
   const toggleOpen = () => {
     setOpen(!open);
   }
+
+  useEffect(() => {
+    fetchCards()
+      .then((res) => setCards(res))
+      .then((error) => console.log(error))
+  }, []);
 
   return (
     <Box>
@@ -41,7 +51,7 @@ const Cards = () => {
       </Box>
       <DataGrid
         autoHeight
-        rows={rows}
+        rows={cards}
         columns={columns}
         disableSelectionOnClick
       />

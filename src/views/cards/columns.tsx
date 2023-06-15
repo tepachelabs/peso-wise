@@ -7,25 +7,6 @@ import { Edit } from '@mui/icons-material';
 // ** Type Imports
 import { GridColDef } from '@mui/x-data-grid';
 
-export const rows = [
-  {
-    id: 1,
-    name: 'Efectivo',
-  },
-  {
-    id: 2,
-    name: 'Amex',
-  },
-  {
-    id: 3,
-    name: 'BBVA',
-  },
-  {
-    id: 4,
-    name: 'HSBC',
-  },
-];
-
 export const columns: GridColDef [] = [
   {
     field: 'name',

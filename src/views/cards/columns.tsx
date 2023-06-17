@@ -5,13 +5,15 @@ import { IconButton } from '@mui/material';
 import { Edit } from '@mui/icons-material';
 
 // ** Type Imports
+import { Card } from '../../types/cards';
 import { GridColDef } from '@mui/x-data-grid';
 
-export const columns: GridColDef [] = [
+export const columns: GridColDef<Card>[] = [
   {
     field: 'name',
     headerName: 'Nombre',
     flex: 0.9,
+    valueGetter: ({ row }) => row.name,
   },
   {
     field: 'action',

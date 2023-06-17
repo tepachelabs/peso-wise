@@ -19,9 +19,10 @@ import { createCard } from '@/views/cards/api';
 interface Props {
   open: boolean;
   toggleOpen: () => void;
+  renewCards: () => void;
 }
 
-export const AddCardDrawer: FC<Props>= ({ toggleOpen, open }) => {
+export const AddCardDrawer: FC<Props>= ({ toggleOpen, open, renewCards }) => {
   const [cardName, setCardName] = useState('');
 
   const handleClose = () => {
@@ -35,11 +36,12 @@ export const AddCardDrawer: FC<Props>= ({ toggleOpen, open }) => {
   const handleSave = () => {
     createCard(cardName)
       .then((res) => {
-        console.log(res);
+        handleClose();
+        renewCards();
       })
       .catch((error) => {
         console.log(error);
-      })
+      });
   };
 
   return (

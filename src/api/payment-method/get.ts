@@ -3,27 +3,17 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 // ** Third Party Imports
 import { PrismaClient } from '@prisma/client';
-import { getServerSession } from 'next-auth';
 
-// Auth Option Import
-import { authOptions } from '@/auth';
+// ** API
+import {auth } from '@/api/middleware';
 
 const prisma = new PrismaClient();
 
-export const get = async (
+const handler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
-  const { name = '' } = req.body;
-
   try {
-    const session = await getServerSession(req, res, authOptions);
-
-    if (!session || !session.user || !session.user.email) {
-      res.status(401).json({ message: "You must be logged in." });
-      return;
-    }
-
     const paymentMethods = await prisma.paymentMethod.findMany();
 
     res.status(200).json(paymentMethods);
@@ -33,3 +23,5 @@ export const get = async (
     });
   }
 };
+
+export const get = auth(handler);

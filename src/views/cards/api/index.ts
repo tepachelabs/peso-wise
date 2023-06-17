@@ -1,16 +1,12 @@
+import axios from 'axios';
+
+// ** Types
+import { Card } from '@/types/cards';
+
 export const fetchCards = () => {
-  return fetch('/api/payment-method')
-    .then((res) => res.json());
+  return axios.get<Card[]>('/api/payment-method');
 }
 
 export const createCard = (name: string) => {
-  return fetch('/api/payment-method', {
-    method: 'POST',
-    headers: {
-      Accept: "application/json"
-    },
-    body: JSON.stringify({
-      name,
-    }),
-  }).then(res => res.json())
+  return axios.post('/api/payment-method', { name });
 };

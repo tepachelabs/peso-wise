@@ -5,6 +5,8 @@ import {
   Box,
   Button,
   Typography,
+  Alert,
+  AlertTitle,
 } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
@@ -20,25 +22,27 @@ import { AddCardDrawer } from '@/views/cards/component/add-card-drawer';
 // ** Column Import
 import { columns } from '@/views/cards/columns';
 
-// ** API
-import { fetchCards } from '@/views/cards/api'
+// ** Hooks
+import { useCards } from '@/views/cards/hooks/useCards';
 
 const Cards = () => {
   const [open, setOpen] = useState(false);
-  const [cards, setCards] = useState([]);
+  const { cards, error, renewCards } = useCards();
 
   const toggleOpen = () => {
     setOpen(!open);
   }
 
-  useEffect(() => {
-    fetchCards()
-      .then((res) => setCards(res))
-      .then((error) => console.log(error))
-  }, []);
-
   return (
     <Box>
+      {
+        error.message && (
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>
+            {error.message}
+          </Alert>
+        )
+      }
       <Box sx={{ p: 2, px: 0, display: 'flex', justifyContent: 'space-between'}}>
         <Typography component="h2" variant="h5">
           Tus Tarjetas
@@ -55,7 +59,11 @@ const Cards = () => {
         columns={columns}
         disableSelectionOnClick
       />
-      <AddCardDrawer open={open} toggleOpen={toggleOpen} />
+      <AddCardDrawer
+        open={open}
+        toggleOpen={toggleOpen}
+        renewCards={renewCards}
+      />
     </Box>
   )
 }

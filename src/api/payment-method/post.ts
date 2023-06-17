@@ -3,42 +3,25 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 // ** Third Party Imports
 import { PrismaClient } from '@prisma/client';
-import { getServerSession } from 'next-auth';
 
-// ** Model Imports
-import { User } from '@/models/user';
-
-// Auth Option Import
-import { authOptions } from '@/auth';
+// ** API
+import { auth } from '@/api/middleware';
 
 const prisma = new PrismaClient();
 
-export const post = async (
+const handler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
-  const { name } = JSON.parse(req.body);
-
   try {
-    const session = await getServerSession(req, res, authOptions);
+    const { user } = req;
 
-    if (!session || !session.user || !session.user.email) {
-      res.status(401).json({ message: "You must be logged in." });
-      return;
-    }
-
-    const user = new User();
-    const foundUser = await user.find(session.user.email);
-
-    if (!foundUser) {
-      res.status(404).json({ message: "User does not exist." });
-      return;
-    }
+    const { name } = req.body;
 
     const newPaymentMethod = await prisma.paymentMethod.create({
       data: {
         name,
-        userId: foundUser.id,
+        userId: user.id,
       },
     });
 
@@ -49,3 +32,5 @@ export const post = async (
     });
   }
 };
+
+export const post = auth(handler);

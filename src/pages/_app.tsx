@@ -1,5 +1,7 @@
 import { ReactNode, ReactElement, FC } from 'react';
 
+import { SnackbarProvider } from 'notistack';
+
 import { ThemeProvider } from '@mui/material/styles';
 
 import type { NextPage } from 'next';
@@ -27,7 +29,9 @@ const App: FC<AppPropsWithLayout> = ({
   return (
     <ThemeProvider theme={theme}>
       <SessionProvider session={session}>
-        {getLayout(<Component {...pageProps} />)}
+        <SnackbarProvider>
+          {getLayout(<Component {...pageProps} />)}
+        </SnackbarProvider>
       </SessionProvider>
     </ThemeProvider>
   );

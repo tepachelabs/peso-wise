@@ -10,6 +10,9 @@ import { fetchCards }  from '@/views/cards/api';
 import { Card } from '@/types/cards';
 import { ErrorMessage } from '@/api/types/error';
 
+// ** Constants
+import {ERROR_GENERIC_UNKNOWN_MESSAGE } from '@/api/constants';
+
 export const useCards = () => {
   const [cards, setCards] = useState<Card[]>([]);
   const [error, setError] = useState<ErrorMessage>({
@@ -28,7 +31,7 @@ export const useCards = () => {
           });
         } else {
           setError({
-            message: 'An unknown error has occurred :('
+            message: ERROR_GENERIC_UNKNOWN_MESSAGE,
           })
         }
 

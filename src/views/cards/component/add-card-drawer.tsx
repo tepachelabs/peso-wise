@@ -1,5 +1,8 @@
 import { useState, ChangeEvent, FC } from 'react';
 
+// ** Third Party
+import { enqueueSnackbar } from 'notistack';
+
 // ** MUI Components
 import {
   Box,
@@ -8,13 +11,15 @@ import {
   TextField,
   Typography,
   InputAdornment,
+  Alert,
+  AlertTitle,
 } from '@mui/material';
 
 // ** MUI Icons
 import { CreditCard } from '@mui/icons-material';
 
-// ** API
-import { createCard } from '@/views/cards/api';
+// ** Hooks
+import { useCreateCard } from '@/views/cards/hooks/useCreateCard';
 
 interface Props {
   open: boolean;
@@ -23,10 +28,18 @@ interface Props {
 }
 
 export const AddCardDrawer: FC<Props>= ({ toggleOpen, open, renewCards }) => {
+  const {
+    error,
+    isLoading,
+    handleSubmit,
+  } = useCreateCard();
+
   const [cardName, setCardName] = useState('');
 
   const handleClose = () => {
     toggleOpen();
+    renewCards();
+    setCardName('');
   };
 
   const handleCardNameChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,14 +47,10 @@ export const AddCardDrawer: FC<Props>= ({ toggleOpen, open, renewCards }) => {
   };
 
   const handleSave = () => {
-    createCard(cardName)
-      .then((res) => {
-        handleClose();
-        renewCards();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    handleSubmit(cardName, () => {
+      enqueueSnackbar(`Your card "${cardName}" was created!`, { variant: 'success' });
+      handleClose();
+    });
   };
 
   return (
@@ -53,33 +62,43 @@ export const AddCardDrawer: FC<Props>= ({ toggleOpen, open, renewCards }) => {
     >
       <Box
         sx={{
-          padding: 3,
+          padding: 2,
           backgroundColor: theme => theme.palette.background.default,
         }}
       >
         <Typography>Agregar un gasto</Typography>
       </Box>
-      <Box sx={{ p: 3 }}>
-        <TextField
-          value={cardName}
-          onChange={handleCardNameChange}
-          sx={{ width: '100%', mb: 2}}
-          placeholder="Nombre de la tarjeta"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <CreditCard />
-              </InputAdornment>
-            ),
-            endAdornment: null,
-          }}
-        />
-        <Button sx={{ mr: 2}} onClick={handleSave} variant="contained">
-          Guardar
-        </Button>
-        <Button onClick={handleClose} variant="outlined">
-          Cancelar
-        </Button>
+      <Box p={2}>
+        <Box mb={2}>
+          <TextField
+            value={cardName}
+            onChange={handleCardNameChange}
+            sx={{ width: '100%', mb: 2}}
+            placeholder="Nombre de la tarjeta"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <CreditCard />
+                </InputAdornment>
+              ),
+              endAdornment: null,
+            }}
+          />
+          <Button disabled={isLoading || cardName === ''} sx={{ mr: 2}} onClick={handleSave} variant="contained">
+            Guardar
+          </Button>
+          <Button disabled={isLoading} onClick={handleClose} variant="outlined">
+            Cancelar
+          </Button>
+        </Box>
+        {
+          error.message !== '' && (
+            <Alert severity="error">
+              <AlertTitle>Error</AlertTitle>
+              {error.message}
+            </Alert>
+          )
+        }
       </Box>
     </Drawer>
   )

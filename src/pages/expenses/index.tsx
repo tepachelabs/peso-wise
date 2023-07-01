@@ -1,21 +1,34 @@
 import {ReactElement, useState} from 'react';
 
+// ** MUI
+import {DataGrid} from '@mui/x-data-grid';
 import {Box, Button, Typography} from '@mui/material';
 
+// ** MUI Icons
 import {Add} from '@mui/icons-material';
 
+// ** Components
 import {Layout} from '@/components/layout';
-import {DataGrid} from '@mui/x-data-grid';
 
-import {rows, columns} from '@/views/expenses/columns';
+// ** View Components
 import {AddExpenseDrawer} from '@/views/expenses/components/add-expense-drawer';
 
+// ** Hooks
+import {useExpenses} from '@/views/expenses/hooks/useExpenses';
+
+// ** Columns
+import {columns} from '@/views/expenses/columns';
+
 const Expenses = () => {
+  const {expenses} = useExpenses();
+
   const [open, setOpen] = useState(false);
 
   const toggleOpen = () => {
     setOpen(!open);
   };
+
+  console.log(expenses);
 
   return (
     <Box>
@@ -31,7 +44,7 @@ const Expenses = () => {
       </Box>
       <DataGrid
         autoHeight
-        rows={rows}
+        rows={expenses}
         columns={columns}
         disableSelectionOnClick
       />

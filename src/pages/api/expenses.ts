@@ -1,35 +1,26 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 
 // ** db
-import {prisma} from '@/db';
+import {post, get} from '@/api/expenses';
 
 export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const {
-    title = '',
-    amount = 0,
-    currency = 'MXN',
-    paymentMethodId,
-    userId,
-  } = req.body;
+  const {method} = req;
 
-  try {
-    const newExpense = await prisma.expense.create({
-      data: {
-        amount,
-        currency,
-        title,
-        paymentMethodId,
-        userId,
-      },
-    });
+  switch (method) {
+    case 'GET':
+      return get(req, res);
 
-    const expenses = await prisma.expense.findMany();
+    case 'POST':
+      return post(req, res);
 
-    res.status(201).json(expenses);
-  } catch (error) {
-    res.status(400).json({
-      error,
-    });
+    case 'PATCH':
+    // return patch(req, res);
+
+    case 'DELETE':
+    // return deleteCard(req, res);
+
+    default:
+      return null;
   }
 };
 

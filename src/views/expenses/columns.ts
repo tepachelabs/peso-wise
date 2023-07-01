@@ -1,35 +1,13 @@
+// ** Types
 import {GridColDef} from '@mui/x-data-grid';
+import {Expense} from '@/types/expenses';
 
-export const rows = [
-  {
-    id: 1,
-    name: 'Tacos al pastor',
-    amount: 45.22,
-    date: 'Today',
-    card: 'AMEX',
-  },
-  {
-    id: 2,
-    name: 'Culto al perro cafe',
-    amount: 85.01,
-    date: 'Today',
-    card: 'BBVA',
-  },
-  {
-    id: 3,
-    name: 'Comida china EL CANTON',
-    amount: 452.1,
-    date: 'Today',
-    card: 'AMEX',
-  },
-];
-
-export const columns: GridColDef[] = [
+export const columns: GridColDef<Expense>[] = [
   {
     field: 'name',
     headerName: 'Nombre',
     flex: 0.2,
-    valueGetter: ({row}) => row.name,
+    valueGetter: ({row}) => row.title,
   },
   {
     field: 'amount',
@@ -41,12 +19,12 @@ export const columns: GridColDef[] = [
     field: 'date',
     headerName: 'Fecha',
     flex: 0.2,
-    valueGetter: ({row}) => row.date,
+    valueGetter: ({row}) => 'Today',
   },
   {
     field: 'card',
     headerName: 'Tarjeta',
     flex: 0.2,
-    valueGetter: ({row}) => row.card,
+    valueGetter: ({row}) => row.paymentMethodId,
   },
 ];

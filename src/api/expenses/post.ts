@@ -11,18 +11,23 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const {user} = req;
 
-    const paymentMethods = await prisma.paymentMethod.findMany({
-      where: {
+    const {cardId, title, amount} = req.body;
+
+    const newExpense = await prisma.expense.create({
+      data: {
         userId: user.id,
+        currency: 'MXN',
+        paymentMethodId: cardId,
+        amount,
+        title,
       },
     });
 
-    res.status(200).json(paymentMethods);
+    res.status(201).json(newExpense);
   } catch (error) {
-    res.status(400).json({
-      error,
-    });
+    console.log(error);
+    res.status(400).json(error);
   }
 };
 
-export const get = auth(handler);
+export const post = auth(handler);

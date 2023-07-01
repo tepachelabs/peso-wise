@@ -11,7 +11,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const {user} = req;
 
-    const paymentMethods = await prisma.paymentMethod.findMany({
+    const paymentMethods = await prisma.expense.findMany({
       where: {
         userId: user.id,
       },

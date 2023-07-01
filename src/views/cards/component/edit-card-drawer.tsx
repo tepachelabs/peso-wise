@@ -19,7 +19,7 @@ import {
 import { CreditCard } from '@mui/icons-material';
 
 // ** Hooks
-import { useUpdateCard } from '@/views/cards/hooks/useCreateCard';
+import { useUpdateCard } from '@/views/cards/hooks/useUpdateCard';
 
 // ** Types
 import {Card } from '@/types/cards';

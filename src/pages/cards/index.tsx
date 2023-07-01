@@ -3,9 +3,9 @@ import { ReactElement, useState, useEffect } from 'react';
 // ** MUI Components
 import {
   Box,
+  Alert,
   Button,
   Typography,
-  Alert,
   AlertTitle,
 } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
@@ -13,10 +13,11 @@ import { DataGrid } from '@mui/x-data-grid';
 // ** MUI Icons
 import { Add } from '@mui/icons-material';
 
-// ** Layout Imports
+// ** Components
+import {DeleteCardDialog } from '@/views/cards/component/delete-card-dialog';
 import { Layout } from '@/components/layout';
 
-// ** Component Imports
+// ** Component Views
 import { AddCardDrawer } from '@/views/cards/component/add-card-drawer';
 import { EditCardDrawer } from '@/views/cards/component/edit-card-drawer';
 
@@ -32,9 +33,13 @@ import {Card } from '@/types/cards';
 const Cards = () => {
   const { cards, error, renewCards } = useCards();
 
+  // ** Toggles
   const [open, setOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState<Card | null>(null)
+  const [deleteOpen, setDeleteOpen] = useState(false);
+
+  // ** Card
+  const [selectedCard, setSelectedCard] = useState<Card | null>(null);
 
   const toggleOpen = () => {
     setOpen(!open);
@@ -43,6 +48,10 @@ const Cards = () => {
   const toggleEditOpen = () => {
     setEditOpen(!editOpen);
   }
+
+  const toggleDelete = () => {
+    setDeleteOpen(!deleteOpen);
+  };
   
   return (
     <Box>
@@ -67,7 +76,7 @@ const Cards = () => {
       <DataGrid
         autoHeight
         rows={cards}
-        columns={columns(toggleEditOpen, setSelectedCard)}
+        columns={columns(toggleEditOpen, toggleDelete, setSelectedCard)}
         disableSelectionOnClick
       />
       <AddCardDrawer
@@ -80,6 +89,12 @@ const Cards = () => {
         card={selectedCard}
         renewCards={renewCards}
         toggleOpen={toggleEditOpen}
+      />
+      <DeleteCardDialog
+        open={deleteOpen}
+        card={selectedCard}
+        renewCards={renewCards}
+        toggleOpen={toggleDelete}
       />
     </Box>
   )

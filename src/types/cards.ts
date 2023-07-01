@@ -3,7 +3,7 @@ export interface Card {
   name: string;
 }
 
-export interface CardCreateResponse {
+export interface CardResponse {
   id: string,
   name: string,
   userId: string;

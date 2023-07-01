@@ -3,17 +3,17 @@ import { useState } from 'react';
 // ** Third Party
 import axios, { AxiosError } from 'axios';
 
-// ** API
-import { createCard, updateCard } from '@/views/cards/api';
-
 // ** Types
-import {ErrorMessage} from '@/api/types/error';
-import {CardResponse } from '@/types/cards';
+import { CardResponse } from '@/types/cards';
+import { ErrorMessage } from '@/api/types/error';
+
+// ** API
+import { deleteCard } from '@/views/cards/api';
 
 // ** Constants
-import {ERROR_GENERIC_UNKNOWN_MESSAGE } from '@/api/constants';
+import { ERROR_GENERIC_UNKNOWN_MESSAGE } from '@/api/constants';
 
-export const useCreateCard = () => {
+export const useDeleteCard = (cardId: string) => {
   const [responseCard, setResponseCard] = useState<CardResponse | null>(null);
   const [error, setError] = useState<ErrorMessage>({
     message: '',
@@ -24,7 +24,7 @@ export const useCreateCard = () => {
   const handleSubmit = (cardName: string, cb?: () => void) => {
     setIsLoading(true);
 
-    createCard(cardName)
+    deleteCard(cardId)
       .then((res) => {
         if (cb) {
           cb();

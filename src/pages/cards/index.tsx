@@ -18,6 +18,7 @@ import { Layout } from '@/components/layout';
 
 // ** Component Imports
 import { AddCardDrawer } from '@/views/cards/component/add-card-drawer';
+import { EditCardDrawer } from '@/views/cards/component/edit-card-drawer';
 
 // ** Column Import
 import { columns } from '@/views/cards/columns';
@@ -25,14 +26,24 @@ import { columns } from '@/views/cards/columns';
 // ** Hooks
 import { useCards } from '@/views/cards/hooks/useCards';
 
+// ** Types
+import {Card } from '@/types/cards';
+
 const Cards = () => {
-  const [open, setOpen] = useState(false);
   const { cards, error, renewCards } = useCards();
+
+  const [open, setOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState<Card | null>(null)
 
   const toggleOpen = () => {
     setOpen(!open);
   }
 
+  const toggleEditOpen = () => {
+    setEditOpen(!editOpen);
+  }
+  
   return (
     <Box>
       {
@@ -56,13 +67,19 @@ const Cards = () => {
       <DataGrid
         autoHeight
         rows={cards}
-        columns={columns}
+        columns={columns(toggleEditOpen, setSelectedCard)}
         disableSelectionOnClick
       />
       <AddCardDrawer
         open={open}
         toggleOpen={toggleOpen}
         renewCards={renewCards}
+      />
+      <EditCardDrawer
+        open={editOpen}
+        card={selectedCard}
+        renewCards={renewCards}
+        toggleOpen={toggleEditOpen}
       />
     </Box>
   )

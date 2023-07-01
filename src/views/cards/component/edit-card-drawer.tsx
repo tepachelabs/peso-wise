@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FC } from 'react';
+import { useState, useEffect, ChangeEvent, FC } from 'react';
 
 // ** Third Party
 import { enqueueSnackbar } from 'notistack';
@@ -19,22 +19,26 @@ import {
 import { CreditCard } from '@mui/icons-material';
 
 // ** Hooks
-import { useCreateCard } from '@/views/cards/hooks/useCreateCard';
+import { useUpdateCard } from '@/views/cards/hooks/useCreateCard';
+
+// ** Types
+import {Card } from '@/types/cards';
 
 interface Props {
   open: boolean;
   toggleOpen: () => void;
   renewCards: () => void;
+  card: Card | null;
 }
 
-export const AddCardDrawer: FC<Props>= ({ toggleOpen, open, renewCards }) => {
+export const EditCardDrawer: FC<Props>= ({ toggleOpen, open, renewCards, card }) => {
   const {
     error,
     isLoading,
     handleSubmit,
-  } = useCreateCard();
+  } = useUpdateCard(card?.id ?? '');
 
-  const [cardName, setCardName] = useState('');
+  const [cardName, setCardName] = useState<string>(card?.name ?? '');
 
   const handleClose = () => {
     toggleOpen();
@@ -48,10 +52,14 @@ export const AddCardDrawer: FC<Props>= ({ toggleOpen, open, renewCards }) => {
 
   const handleSave = () => {
     handleSubmit(cardName, () => {
-      enqueueSnackbar(`Your card "${cardName}" was created!`, { variant: 'success' });
+      enqueueSnackbar(`Your card "${cardName}" was updated!`, { variant: 'success' });
       handleClose();
     });
   };
+
+  useEffect(() => {
+    setCardName(card?.name ?? '');
+  }, [card?.name]);
 
   return (
     <Drawer
@@ -66,7 +74,7 @@ export const AddCardDrawer: FC<Props>= ({ toggleOpen, open, renewCards }) => {
           backgroundColor: theme => theme.palette.background.default,
         }}
       >
-        <Typography>Agregar una tarjeta</Typography>
+        <Typography>Editar tarjeta</Typography>
       </Box>
       <Box p={2}>
         <Box mb={2}>

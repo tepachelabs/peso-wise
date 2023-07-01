@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 // ** API
-import { get, post } from '@/api/payment-method';
+import { get, post, patch } from '@/api/payment-method';
 
 export const handler = (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
@@ -13,6 +13,9 @@ export const handler = (req: NextApiRequest, res: NextApiResponse) => {
 
     case 'POST':
       return post(req, res);
+
+    case 'PATCH':
+      return patch(req, res);
 
     default:
       return null;

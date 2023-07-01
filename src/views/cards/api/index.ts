@@ -10,3 +10,11 @@ export const fetchCards = () => {
 export const createCard = (name: string) => {
   return axios.post<CardCreateResponse>('/api/payment-method', { name });
 };
+
+export const updateCard = (cardId: string, name: string) => {
+  return axios.patch<CardCreateResponse>('/api/payment-method', { name }, {
+    params: {
+      cardId,
+    },
+  });
+};

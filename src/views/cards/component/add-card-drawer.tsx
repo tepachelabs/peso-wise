@@ -68,7 +68,7 @@ export const AddCardDrawer: FC<Props>= ({ toggleOpen, open, renewCards }) => {
       >
         <Typography>Agregar una tarjeta</Typography>
       </Box>
-      <Box p={2}>
+      <Box p={3}>
         <Box mb={2}>
           <TextField
             value={cardName}

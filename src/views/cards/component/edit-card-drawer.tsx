@@ -76,7 +76,7 @@ export const EditCardDrawer: FC<Props>= ({ toggleOpen, open, renewCards, card })
       >
         <Typography>Editar tarjeta</Typography>
       </Box>
-      <Box p={2}>
+      <Box p={3}>
         <Box mb={2}>
           <TextField
             value={cardName}

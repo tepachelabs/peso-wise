@@ -1,13 +1,8 @@
-import {
-  useState,
-  MouseEvent,
-  ChangeEvent,
-  FC,
-} from 'react';
+import {useState, MouseEvent, ChangeEvent, FC} from 'react';
 
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 
-import { useSession, signOut } from 'next-auth/react';
+import {useSession, signOut} from 'next-auth/react';
 
 import Box from '@mui/material/Box';
 import Menu from '@mui/material/Menu';
@@ -34,26 +29,21 @@ import {
   Logout,
 } from '@mui/icons-material';
 
-import { urls } from '@/utils/constants';
+import {urls} from '@/utils/constants';
 
 interface DrawerContentProps {
   toggleDrawer: () => void;
 }
 
-const DrawerContent: FC<DrawerContentProps> = ({ toggleDrawer }) => {
+const DrawerContent: FC<DrawerContentProps> = ({toggleDrawer}) => {
   const router = useRouter();
 
   const navigateTo = (url: string) => {
-    router
-      .push(url)
-      .then(() => toggleDrawer());
-  }
+    router.push(url).then(() => toggleDrawer());
+  };
 
   return (
-    <Box
-      sx={{ width: 250 }}
-      role="presentation"
-    >
+    <Box sx={{width: 250}} role="presentation">
       <List>
         <ListItem disablePadding>
           <ListItemButton onClick={() => navigateTo(urls.home)}>
@@ -90,8 +80,7 @@ const DrawerContent: FC<DrawerContentProps> = ({ toggleDrawer }) => {
       </List>
     </Box>
   );
-}
-
+};
 
 export const MenuAppBar = () => {
   const session = useSession();
@@ -117,42 +106,37 @@ export const MenuAppBar = () => {
       redirect: true,
       callbackUrl: '/login',
     });
-    handleClose()
-  }
+    handleClose();
+  };
 
   const toggleDrawer = () => {
-    setOpen(!open)
-  }
+    setOpen(!open);
+  };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='static'>
+    <Box sx={{flexGrow: 1}}>
+      <AppBar position="static">
         <Toolbar>
           <IconButton
-            size='large'
-            edge='start'
-            color='inherit'
-            aria-label='menu'
-            sx={{ mr: 2 }}
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{mr: 2}}
             onClick={toggleDrawer}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
             Pesowise
           </Typography>
           {auth && (
             <div>
-              <Stack
-                alignItems="center"
-                direction="row"
-              >
-                <Typography>
-                  {session.data?.user?.name}
-                </Typography>
+              <Stack alignItems="center" direction="row">
+                <Typography>{session.data?.user?.name}</Typography>
                 <IconButton
                   sx={{
-                    color: theme => theme.palette.primary.contrastText
+                    color: (theme) => theme.palette.primary.contrastText,
                   }}
                   onClick={handleLogout}
                 >
@@ -163,12 +147,9 @@ export const MenuAppBar = () => {
           )}
         </Toolbar>
       </AppBar>
-      <Drawer
-        open={open}
-        onClose={toggleDrawer}
-      >
+      <Drawer open={open} onClose={toggleDrawer}>
         <DrawerContent toggleDrawer={toggleDrawer} />
       </Drawer>
     </Box>
   );
-}
+};

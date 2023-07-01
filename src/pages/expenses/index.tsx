@@ -1,29 +1,25 @@
-import { ReactElement, useState } from 'react';
+import {ReactElement, useState} from 'react';
 
-import {
-  Box,
-  Button,
-  Typography,
-} from '@mui/material';
+import {Box, Button, Typography} from '@mui/material';
 
-import { Add } from '@mui/icons-material';
+import {Add} from '@mui/icons-material';
 
-import { Layout } from '@/components/layout';
-import { DataGrid } from '@mui/x-data-grid';
+import {Layout} from '@/components/layout';
+import {DataGrid} from '@mui/x-data-grid';
 
-import { rows, columns } from '@/views/expenses/columns';
-import { AddExpenseDrawer } from '@/views/expenses/components/add-expense-drawer';
+import {rows, columns} from '@/views/expenses/columns';
+import {AddExpenseDrawer} from '@/views/expenses/components/add-expense-drawer';
 
 const Expenses = () => {
   const [open, setOpen] = useState(false);
 
   const toggleOpen = () => {
     setOpen(!open);
-  }
+  };
 
   return (
     <Box>
-      <Box sx={{ p: 2, px: 0, display: 'flex', justifyContent: 'space-between'}}>
+      <Box sx={{p: 2, px: 0, display: 'flex', justifyContent: 'space-between'}}>
         <Typography component="h2" variant="h5">
           Tus Gastos
         </Typography>
@@ -41,15 +37,11 @@ const Expenses = () => {
       />
       <AddExpenseDrawer open={open} toggleOpen={toggleOpen} />
     </Box>
-  )
-}
+  );
+};
 
 Expenses.getLayout = (page: ReactElement) => {
-  return (
-    <Layout>
-      {page}
-    </Layout>
-  )
-}
+  return <Layout>{page}</Layout>;
+};
 
 export default Expenses;

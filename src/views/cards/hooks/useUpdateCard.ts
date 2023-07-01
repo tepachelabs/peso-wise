@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import {useState} from 'react';
 
 // ** Third Party
-import axios, { AxiosError } from 'axios';
+import axios, {AxiosError} from 'axios';
 
 // ** Types
-import { CardResponse } from '@/types/cards';
-import { ErrorMessage } from '@/api/types/error';
+import {CardResponse} from '@/types/cards';
+import {ErrorMessage} from '@/api/types/error';
 
 // ** API
-import { updateCard } from '@/views/cards/api';
+import {updateCard} from '@/views/cards/api';
 
 // ** Constants
-import { ERROR_GENERIC_UNKNOWN_MESSAGE } from '@/api/constants';
+import {ERROR_GENERIC_UNKNOWN_MESSAGE} from '@/api/constants';
 
 export const useUpdateCard = (cardId: string) => {
   const [responseCard, setResponseCard] = useState<CardResponse | null>(null);
@@ -35,18 +35,18 @@ export const useUpdateCard = (cardId: string) => {
         if (axios.isAxiosError(error) && error.response) {
           const _error = error as AxiosError<ErrorMessage>;
           setError({
-            message: _error?.response?.data.message ?? ''
-          })
+            message: _error?.response?.data.message ?? '',
+          });
         } else {
           setError({
             message: ERROR_GENERIC_UNKNOWN_MESSAGE,
-          })
+          });
         }
       })
       .finally(() => {
-        setIsLoading(false)
+        setIsLoading(false);
       });
-  }
+  };
 
-  return { responseCard, error, isLoading, handleSubmit };
+  return {responseCard, error, isLoading, handleSubmit};
 };

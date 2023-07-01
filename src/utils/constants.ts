@@ -4,4 +4,4 @@ export const urls = {
   cards: '/cards',
   settings: '/settings',
   expenses: '/expenses',
-}
+};

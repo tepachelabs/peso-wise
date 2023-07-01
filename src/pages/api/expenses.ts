@@ -1,18 +1,15 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type {NextApiRequest, NextApiResponse} from 'next';
 
 // ** db
 import {prisma} from '@/db';
 
-export const handler = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
+export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     title = '',
     amount = 0,
     currency = 'MXN',
     paymentMethodId,
-    userId
+    userId,
   } = req.body;
 
   try {

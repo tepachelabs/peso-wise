@@ -2,6 +2,6 @@
 import NextAuth from 'next-auth';
 
 // ** Local Auth Import
-import { authOptions } from '@/auth';
+import {authOptions} from '@/auth';
 
 export default NextAuth(authOptions);

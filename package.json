@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:push": "npx prisma db push"
+    "db:push": "npx prisma db push,",
+    "prettier": "npx prettier --write .",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@auth/core": "^0.8.1",
@@ -36,6 +38,12 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
+    "prettier": "2.8.8",
     "prisma": "^4.14.1"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }

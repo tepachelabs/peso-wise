@@ -1,13 +1,15 @@
-html, body, #__next {
-    height: 100%;
+html,
+body,
+#__next {
+  height: 100%;
 }
 
 body {
-    margin: 0;
+  margin: 0;
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

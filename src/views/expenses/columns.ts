@@ -1,4 +1,4 @@
-import { GridColDef } from '@mui/x-data-grid';
+import {GridColDef} from '@mui/x-data-grid';
 
 export const rows = [
   {
@@ -18,35 +18,35 @@ export const rows = [
   {
     id: 3,
     name: 'Comida china EL CANTON',
-    amount: 452.10,
+    amount: 452.1,
     date: 'Today',
-    card: 'AMEX'
+    card: 'AMEX',
   },
 ];
 
-export const columns: GridColDef [] = [
+export const columns: GridColDef[] = [
   {
     field: 'name',
     headerName: 'Nombre',
     flex: 0.2,
-    valueGetter: ({ row }) => row.name,
+    valueGetter: ({row}) => row.name,
   },
   {
     field: 'amount',
     headerName: 'Precio',
     flex: 0.2,
-    valueGetter: ({ row }) => row.amount,
+    valueGetter: ({row}) => row.amount,
   },
   {
     field: 'date',
     headerName: 'Fecha',
     flex: 0.2,
-    valueGetter: ({ row }) => row.date,
+    valueGetter: ({row}) => row.date,
   },
   {
     field: 'card',
     headerName: 'Tarjeta',
     flex: 0.2,
-    valueGetter: ({ row }) => row.card,
+    valueGetter: ({row}) => row.card,
   },
 ];

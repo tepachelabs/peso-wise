@@ -1,11 +1,11 @@
-import { FC } from 'react';
-import { Alert, AlertTitle } from '@mui/material';
+import {FC} from 'react';
+import {Alert, AlertTitle} from '@mui/material';
 
 interface Props {
   message?: string;
 }
 
-export const AlertError: FC<Props> = ({ message }) => {
+export const AlertError: FC<Props> = ({message}) => {
   if (!message) {
     return null;
   }
@@ -15,5 +15,5 @@ export const AlertError: FC<Props> = ({ message }) => {
       <AlertTitle>Error</AlertTitle>
       {message}
     </Alert>
-  )
-}
+  );
+};

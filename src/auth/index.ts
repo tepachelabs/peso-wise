@@ -1,11 +1,11 @@
 // ** Third Party Imports
-import { AuthOptions } from 'next-auth';
-import { Adapter } from 'next-auth/adapters';
-import { PrismaAdapter } from '@auth/prisma-adapter';
+import {AuthOptions} from 'next-auth';
+import {Adapter} from 'next-auth/adapters';
+import {PrismaAdapter} from '@auth/prisma-adapter';
 import GoogleProvider from 'next-auth/providers/google';
 
 // ** Prisma Import
-import { PrismaClient } from '@prisma/client';
+import {PrismaClient} from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -19,9 +19,9 @@ export const authOptions: AuthOptions = {
         params: {
           prompt: 'consent',
           access_type: 'offline',
-          response_type: 'code'
-        }
-      }
-    })
-  ]
+          response_type: 'code',
+        },
+      },
+    }),
+  ],
 };

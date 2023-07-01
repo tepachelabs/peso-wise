@@ -1,37 +1,31 @@
-import { ReactElement, useState, useEffect } from 'react';
+import {ReactElement, useState, useEffect} from 'react';
 
 // ** MUI Components
-import {
-  Box,
-  Alert,
-  Button,
-  Typography,
-  AlertTitle,
-} from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
+import {Box, Alert, Button, Typography, AlertTitle} from '@mui/material';
+import {DataGrid} from '@mui/x-data-grid';
 
 // ** MUI Icons
-import { Add } from '@mui/icons-material';
+import {Add} from '@mui/icons-material';
 
 // ** Components
-import {DeleteCardDialog } from '@/views/cards/component/delete-card-dialog';
-import { Layout } from '@/components/layout';
+import {DeleteCardDialog} from '@/views/cards/component/delete-card-dialog';
+import {Layout} from '@/components/layout';
 
 // ** Component Views
-import { AddCardDrawer } from '@/views/cards/component/add-card-drawer';
-import { EditCardDrawer } from '@/views/cards/component/edit-card-drawer';
+import {AddCardDrawer} from '@/views/cards/component/add-card-drawer';
+import {EditCardDrawer} from '@/views/cards/component/edit-card-drawer';
 
 // ** Column Import
-import { columns } from '@/views/cards/columns';
+import {columns} from '@/views/cards/columns';
 
 // ** Hooks
-import { useCards } from '@/views/cards/hooks/useCards';
+import {useCards} from '@/views/cards/hooks/useCards';
 
 // ** Types
-import {Card } from '@/types/cards';
+import {Card} from '@/types/cards';
 
 const Cards = () => {
-  const { cards, error, renewCards } = useCards();
+  const {cards, error, renewCards} = useCards();
 
   // ** Toggles
   const [open, setOpen] = useState(false);
@@ -43,27 +37,25 @@ const Cards = () => {
 
   const toggleOpen = () => {
     setOpen(!open);
-  }
+  };
 
   const toggleEditOpen = () => {
     setEditOpen(!editOpen);
-  }
+  };
 
   const toggleDelete = () => {
     setDeleteOpen(!deleteOpen);
   };
-  
+
   return (
     <Box>
-      {
-        error.message && (
-          <Alert severity="error">
-            <AlertTitle>Error</AlertTitle>
-            {error.message}
-          </Alert>
-        )
-      }
-      <Box sx={{ p: 2, px: 0, display: 'flex', justifyContent: 'space-between'}}>
+      {error.message && (
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>
+          {error.message}
+        </Alert>
+      )}
+      <Box sx={{p: 2, px: 0, display: 'flex', justifyContent: 'space-between'}}>
         <Typography component="h2" variant="h5">
           Tus Tarjetas
         </Typography>
@@ -97,15 +89,11 @@ const Cards = () => {
         toggleOpen={toggleDelete}
       />
     </Box>
-  )
-}
+  );
+};
 
 Cards.getLayout = (page: ReactElement) => {
-  return (
-    <Layout>
-      {page}
-    </Layout>
-  )
-}
+  return <Layout>{page}</Layout>;
+};
 
 export default Cards;

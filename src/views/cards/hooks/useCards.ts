@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 
 // Third Party
-import axios, { AxiosError } from 'axios';
+import axios, {AxiosError} from 'axios';
 
 // ** API
-import { fetchCards }  from '@/views/cards/api';
+import {fetchCards} from '@/views/cards/api';
 
 // ** Types
-import { Card } from '@/types/cards';
-import { ErrorMessage } from '@/api/types/error';
+import {Card} from '@/types/cards';
+import {ErrorMessage} from '@/api/types/error';
 
 // ** Constants
-import {ERROR_GENERIC_UNKNOWN_MESSAGE } from '@/api/constants';
+import {ERROR_GENERIC_UNKNOWN_MESSAGE} from '@/api/constants';
 
 export const useCards = () => {
   const [cards, setCards] = useState<Card[]>([]);
@@ -32,16 +32,16 @@ export const useCards = () => {
         } else {
           setError({
             message: ERROR_GENERIC_UNKNOWN_MESSAGE,
-          })
+          });
         }
 
         setCards([]);
       });
-  }
+  };
 
   useEffect(() => {
-    renewCards()
+    renewCards();
   }, []);
 
-  return { cards, error, renewCards };
+  return {cards, error, renewCards};
 };

@@ -1,30 +1,25 @@
-import { FC } from 'react';
+import {FC} from 'react';
 
 // ** MUI Components
-import {
-  TextField,
-  Autocomplete,
-  InputAdornment,
-} from '@mui/material';
+import {TextField, Autocomplete, InputAdornment} from '@mui/material';
 
 // ** MUI Icons
-import { AttachMoney, ReceiptLong } from '@mui/icons-material';
+import {AttachMoney, ReceiptLong} from '@mui/icons-material';
 
 // ** Components
-import { BasicDrawer } from '@/components/drawers/basic';
-import { DrawerFooter } from '@/components/drawers/footer';
+import {BasicDrawer} from '@/components/drawers/basic';
+import {DrawerFooter} from '@/components/drawers/footer';
 
 // ** Hooks
-import { useCards } from '@/views/cards/hooks/useCards';
-
+import {useCards} from '@/views/cards/hooks/useCards';
 
 interface Props {
   open: boolean;
   toggleOpen: () => void;
 }
 
-export const AddExpenseDrawer: FC<Props>= ({ toggleOpen, open }) => {
-  const { cards } = useCards();
+export const AddExpenseDrawer: FC<Props> = ({toggleOpen, open}) => {
+  const {cards} = useCards();
 
   const handleClose = () => {
     toggleOpen();
@@ -43,13 +38,13 @@ export const AddExpenseDrawer: FC<Props>= ({ toggleOpen, open }) => {
             <InputAdornment position="start">
               <ReceiptLong />
             </InputAdornment>
-          )
+          ),
         }}
-        sx={{ width: '100%', mb: 2}}
+        sx={{width: '100%', mb: 2}}
         placeholder="Nombre del gasto"
       />
       <TextField
-        sx={{ width: '100%', mb: 2}}
+        sx={{width: '100%', mb: 2}}
         type="number"
         placeholder="Precio"
         InputProps={{
@@ -69,12 +64,10 @@ export const AddExpenseDrawer: FC<Props>= ({ toggleOpen, open }) => {
         }}
         options={cards.map((card) => ({
           label: card.name,
-          id: card.id
+          id: card.id,
         }))}
-        sx={{ width: '100%', mb: 2 }}
-        renderInput={(params) => (
-          <TextField {...params} label="Tarjeta" />
-        )}
+        sx={{width: '100%', mb: 2}}
+        renderInput={(params) => <TextField {...params} label="Tarjeta" />}
       />
       <DrawerFooter
         isSubmitDisabled={false}
@@ -83,5 +76,5 @@ export const AddExpenseDrawer: FC<Props>= ({ toggleOpen, open }) => {
         handleCancel={handleClose}
       />
     </BasicDrawer>
-  )
+  );
 };

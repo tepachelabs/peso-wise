@@ -1,11 +1,11 @@
 // ** Next Imports
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type {NextApiRequest, NextApiResponse} from 'next';
 
 // ** API
-import { get, post, patch, deleteCard } from '@/api/payment-method';
+import {get, post, patch, deleteCard} from '@/api/payment-method';
 
 export const handler = (req: NextApiRequest, res: NextApiResponse) => {
-  const { method } = req;
+  const {method} = req;
 
   switch (method) {
     case 'GET':

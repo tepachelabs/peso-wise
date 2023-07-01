@@ -1,7 +1,7 @@
-import { useState, ChangeEvent, FC } from 'react';
+import {useState, ChangeEvent, FC} from 'react';
 
 // ** Third Party
-import { enqueueSnackbar } from 'notistack';
+import {enqueueSnackbar} from 'notistack';
 
 // ** MUI Components
 import {
@@ -14,14 +14,14 @@ import {
 } from '@mui/material';
 
 // ** Components
-import { DrawerFooter } from '@/components/drawers/footer';
-import { BasicDrawer } from '@/components/drawers/basic';
+import {DrawerFooter} from '@/components/drawers/footer';
+import {BasicDrawer} from '@/components/drawers/basic';
 
 // ** MUI Icons
-import { CreditCard } from '@mui/icons-material';
+import {CreditCard} from '@mui/icons-material';
 
 // ** Hooks
-import { useCreateCard } from '@/views/cards/hooks/useCreateCard';
+import {useCreateCard} from '@/views/cards/hooks/useCreateCard';
 
 interface Props {
   open: boolean;
@@ -29,12 +29,8 @@ interface Props {
   renewCards: () => void;
 }
 
-export const AddCardDrawer: FC<Props>= ({ toggleOpen, open, renewCards }) => {
-  const {
-    error,
-    isLoading,
-    handleSubmit,
-  } = useCreateCard();
+export const AddCardDrawer: FC<Props> = ({toggleOpen, open, renewCards}) => {
+  const {error, isLoading, handleSubmit} = useCreateCard();
 
   const [cardName, setCardName] = useState('');
 
@@ -50,7 +46,9 @@ export const AddCardDrawer: FC<Props>= ({ toggleOpen, open, renewCards }) => {
 
   const handleSave = () => {
     handleSubmit(cardName, () => {
-      enqueueSnackbar(`Your card "${cardName}" was created!`, { variant: 'success' });
+      enqueueSnackbar(`Your card "${cardName}" was created!`, {
+        variant: 'success',
+      });
       handleClose();
     });
   };
@@ -65,7 +63,7 @@ export const AddCardDrawer: FC<Props>= ({ toggleOpen, open, renewCards }) => {
       <TextField
         value={cardName}
         onChange={handleCardNameChange}
-        sx={{ width: '100%', mb: 2}}
+        sx={{width: '100%', mb: 2}}
         placeholder="Nombre de la tarjeta"
         InputProps={{
           startAdornment: (
@@ -83,5 +81,5 @@ export const AddCardDrawer: FC<Props>= ({ toggleOpen, open, renewCards }) => {
         handleCancel={handleClose}
       />
     </BasicDrawer>
-  )
+  );
 };

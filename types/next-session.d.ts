@@ -1,6 +1,6 @@
-import { User } from "@/types/user";
+import {User} from '@/types/user';
 
-declare module "next" {
+declare module 'next' {
   interface NextApiRequest {
     user: User;
   }

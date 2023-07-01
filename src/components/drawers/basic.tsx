@@ -1,17 +1,13 @@
-import { FC, ReactNode } from 'react';
+import {FC, ReactNode} from 'react';
 
 // ** MUI
-import {
-  Box,
-  Drawer,
-  Typography,
-} from '@mui/material';
+import {Box, Drawer, Typography} from '@mui/material';
 
 // ** Components
-import { AlertError } from '@/components/alert-error';
+import {AlertError} from '@/components/alert-error';
 
 // ** Types
-import { DrawerProps } from '@mui/material/Drawer';
+import {DrawerProps} from '@mui/material/Drawer';
 
 interface Props {
   children: ReactNode;
@@ -19,8 +15,14 @@ interface Props {
   errorMessage: string;
 }
 
-export const BasicDrawer: FC<DrawerProps & Props> = ({ open, onClose, drawerTitle, errorMessage, children, ...rest}) => {
-
+export const BasicDrawer: FC<DrawerProps & Props> = ({
+  open,
+  onClose,
+  drawerTitle,
+  errorMessage,
+  children,
+  ...rest
+}) => {
   return (
     <Drawer
       open={open}
@@ -32,17 +34,15 @@ export const BasicDrawer: FC<DrawerProps & Props> = ({ open, onClose, drawerTitl
       <Box
         sx={{
           padding: 2,
-          backgroundColor: theme => theme.palette.background.default,
+          backgroundColor: (theme) => theme.palette.background.default,
         }}
       >
         <Typography>{drawerTitle}</Typography>
       </Box>
       <Box p={2}>
-        <Box mb={2}>
-          {children}
-        </Box>
+        <Box mb={2}>{children}</Box>
         <AlertError message={errorMessage} />
       </Box>
     </Drawer>
-  )
-}
+  );
+};

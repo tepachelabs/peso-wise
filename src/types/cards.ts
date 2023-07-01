@@ -4,7 +4,7 @@ export interface Card {
 }
 
 export interface CardResponse {
-  id: string,
-  name: string,
+  id: string;
+  name: string;
   userId: string;
 }

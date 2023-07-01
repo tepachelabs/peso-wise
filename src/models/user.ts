@@ -2,7 +2,6 @@
 import {prisma} from '@/db';
 
 export class User {
-
   async create(name: string, email: string) {
     const user = await this.find(email);
 
@@ -14,7 +13,7 @@ export class User {
       data: {
         email,
         name,
-      }
+      },
     });
   }
 

@@ -1,20 +1,17 @@
 // ** Next Imports
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type {NextApiRequest, NextApiResponse} from 'next';
 
 // ** API
-import { auth } from '@/api/middleware';
+import {auth} from '@/api/middleware';
 
 // ** db
 import {prisma} from '@/db';
 
-const handler = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { user } = req;
+    const {user} = req;
 
-    const { name } = req.body;
+    const {name} = req.body;
 
     const newPaymentMethod = await prisma.paymentMethod.create({
       data: {
@@ -26,7 +23,7 @@ const handler = async (
     res.status(201).json(newPaymentMethod);
   } catch (error) {
     res.status(400).json({
-      error
+      error,
     });
   }
 };

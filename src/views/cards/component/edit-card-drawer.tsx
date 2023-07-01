@@ -11,9 +11,11 @@ import {
   TextField,
   Typography,
   InputAdornment,
-  Alert,
-  AlertTitle,
 } from '@mui/material';
+
+// ** Components
+import { BasicDrawer } from '@/components/drawers/basic';
+import { DrawerFooter } from '@/components/drawers/footer';
 
 // ** MUI Icons
 import { CreditCard } from '@mui/icons-material';
@@ -62,52 +64,32 @@ export const EditCardDrawer: FC<Props>= ({ toggleOpen, open, renewCards, card })
   }, [card?.name]);
 
   return (
-    <Drawer
+    <BasicDrawer
       open={open}
-      anchor="right"
-      onClose={handleClose}
-      sx={{'& .MuiDrawer-paper': {width: {xs: 300, sm: 400}}}}
+      onClose={toggleOpen}
+      errorMessage={error.message}
+      drawerTitle="Editando tarjeta"
     >
-      <Box
-        sx={{
-          padding: 2,
-          backgroundColor: theme => theme.palette.background.default,
+      <TextField
+        value={cardName}
+        onChange={handleCardNameChange}
+        sx={{ width: '100%', mb: 2}}
+        placeholder="Nombre de la tarjeta"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <CreditCard />
+            </InputAdornment>
+          ),
+          endAdornment: null,
         }}
-      >
-        <Typography>Editar tarjeta</Typography>
-      </Box>
-      <Box p={3}>
-        <Box mb={2}>
-          <TextField
-            value={cardName}
-            onChange={handleCardNameChange}
-            sx={{ width: '100%', mb: 2}}
-            placeholder="Nombre de la tarjeta"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <CreditCard />
-                </InputAdornment>
-              ),
-              endAdornment: null,
-            }}
-          />
-          <Button disabled={isLoading || cardName === ''} sx={{ mr: 2}} onClick={handleSave} variant="contained">
-            Guardar
-          </Button>
-          <Button disabled={isLoading} onClick={handleClose} variant="outlined">
-            Cancelar
-          </Button>
-        </Box>
-        {
-          error.message !== '' && (
-            <Alert severity="error">
-              <AlertTitle>Error</AlertTitle>
-              {error.message}
-            </Alert>
-          )
-        }
-      </Box>
-    </Drawer>
+      />
+      <DrawerFooter
+        isSubmitDisabled={isLoading || cardName === ''}
+        isCancelDisabled={isLoading}
+        handleSubmit={handleSave}
+        handleCancel={handleClose}
+      />
+    </BasicDrawer>
   )
 };

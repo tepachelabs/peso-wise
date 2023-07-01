@@ -12,13 +12,13 @@ export const columns = (toggle: () => void, toggleDelete: () => void, onCardChan
   {
     field: 'name',
     headerName: 'Nombre',
-    flex: 0.9,
+    flex: 0.7,
     valueGetter: ({ row }) => row.name,
   },
   {
     field: 'action',
     headerName: 'Actions',
-    flex: 0.1,
+    flex: 0.3,
     renderCell: ({ row }) => (
       <>
         <IconButton

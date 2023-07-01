@@ -2,17 +2,21 @@ import { FC } from 'react';
 
 // ** MUI Components
 import {
-  Box,
-  Drawer,
-  Button,
   TextField,
-  Typography,
   Autocomplete,
   InputAdornment,
 } from '@mui/material';
 
 // ** MUI Icons
-import { AttachMoney, ReceiptLong, CreditCard } from '@mui/icons-material';
+import { AttachMoney, ReceiptLong } from '@mui/icons-material';
+
+// ** Components
+import { BasicDrawer } from '@/components/drawers/basic';
+import { DrawerFooter } from '@/components/drawers/footer';
+
+// ** Hooks
+import { useCards } from '@/views/cards/hooks/useCards';
+
 
 interface Props {
   open: boolean;
@@ -20,67 +24,64 @@ interface Props {
 }
 
 export const AddExpenseDrawer: FC<Props>= ({ toggleOpen, open }) => {
+  const { cards } = useCards();
 
   const handleClose = () => {
     toggleOpen();
   };
 
   return (
-    <Drawer
+    <BasicDrawer
       open={open}
-      anchor="right"
-      onClose={handleClose}
-      sx={{'& .MuiDrawer-paper': {width: {xs: 300, sm: 400}}}}
+      onClose={toggleOpen}
+      errorMessage=""
+      drawerTitle="Agregar un gasto"
     >
-      <Box
-        sx={{
-          padding: 3,
-          backgroundColor: theme => theme.palette.background.default,
+      <TextField
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <ReceiptLong />
+            </InputAdornment>
+          )
         }}
-      >
-        <Typography>Agregar un gasto</Typography>
-      </Box>
-      <Box sx={{ p: 3 }}>
-        <TextField
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <ReceiptLong />
-              </InputAdornment>
-            )
-          }}
-          sx={{ width: '100%', mb: 2}}
-          placeholder="Nombre del gasto"
-        />
-        <TextField
-          sx={{ width: '100%', mb: 2}}
-          type="number"
-          placeholder="Precio"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <AttachMoney />
-              </InputAdornment>
-            ),
-            endAdornment: null,
-          }}
-        />
-        <Autocomplete
-          disablePortal
-          id="credit-card"
-          options={['Efectivo', 'AMEX', 'BBVA', 'HSBC']}
-          sx={{ width: '100%', mb: 2 }}
-          renderInput={(params) => (
-            <TextField {...params} label="Tarjeta" />
-          )}
-        />
-        <Button sx={{ mr: 2}} onClick={handleClose} variant="contained">
-          Guardar
-        </Button>
-        <Button onClick={handleClose} variant="outlined">
-          Cancelar
-        </Button>
-      </Box>
-    </Drawer>
+        sx={{ width: '100%', mb: 2}}
+        placeholder="Nombre del gasto"
+      />
+      <TextField
+        sx={{ width: '100%', mb: 2}}
+        type="number"
+        placeholder="Precio"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <AttachMoney />
+            </InputAdornment>
+          ),
+          endAdornment: null,
+        }}
+      />
+      <Autocomplete
+        disablePortal
+        id="credit-card"
+        onChange={(_, newValue) => {
+          console.log(newValue);
+        }}
+        options={cards.map((card) => ({
+          label: card.name,
+          id: card.id
+        }))}
+        sx={{ width: '100%', mb: 2 }}
+        renderInput={(params) => (
+          <TextField {...params} label="Tarjeta" />
+        )}
+      />
+      <DrawerFooter
+        isSubmitDisabled={false}
+        isCancelDisabled={false}
+        handleSubmit={handleClose}
+        handleCancel={handleClose}
+      />
+    </BasicDrawer>
   )
 };

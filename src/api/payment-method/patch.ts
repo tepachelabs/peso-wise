@@ -5,7 +5,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { auth } from '@/api/middleware';
 
 // ** db
-import {prisma } from '@/db';
+import {prisma} from '@/db';
 
 const handler = async (
   req: NextApiRequest,

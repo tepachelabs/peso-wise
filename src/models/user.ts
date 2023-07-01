@@ -1,6 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+// ** db
+import {prisma} from '@/db';
 
 export class User {
 

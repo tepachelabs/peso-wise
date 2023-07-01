@@ -1,13 +1,11 @@
 // ** Next Imports
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-// ** Third Party Imports
-import { PrismaClient } from '@prisma/client';
-
 // ** API
 import { auth } from '@/api/middleware';
 
-const prisma = new PrismaClient();
+// ** db
+import {prisma} from '@/db';
 
 const handler = async (
   req: NextApiRequest,

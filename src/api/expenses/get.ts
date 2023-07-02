@@ -15,13 +15,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       where: {
         userId: user.id,
       },
+      include: {
+        PaymentMethod: true,
+      },
     });
 
     res.status(200).json(paymentMethods);
   } catch (error) {
-    res.status(400).json({
-      error,
-    });
+    res.status(400).json(error);
   }
 };
 

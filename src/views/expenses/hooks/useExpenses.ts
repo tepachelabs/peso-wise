@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 
-// ** Third Party
-import axios from 'axios';
+// ** API
+import {fetchExpenses} from '@/views/expenses/api';
 
 // ** Types
 import {Expense} from '@/types/expenses';
@@ -9,16 +9,19 @@ import {Expense} from '@/types/expenses';
 export const useExpenses = () => {
   const [expenses, setExpenses] = useState<Expense[]>([]);
 
-  useEffect(() => {
-    axios
-      .get('/api/expenses')
+  const renewExpenses = () => {
+    fetchExpenses()
       .then((res) => {
         setExpenses(res.data);
       })
       .catch(() => {
         setExpenses([]);
       });
+  };
+
+  useEffect(() => {
+    renewExpenses();
   }, []);
 
-  return {expenses};
+  return {expenses, renewExpenses};
 };

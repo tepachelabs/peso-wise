@@ -21,6 +21,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         amount,
         title,
       },
+      include: {
+        PaymentMethod: true,
+      },
     });
 
     res.status(201).json(newExpense);

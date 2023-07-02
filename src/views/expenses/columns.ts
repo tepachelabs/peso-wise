@@ -25,6 +25,6 @@ export const columns: GridColDef<Expense>[] = [
     field: 'card',
     headerName: 'Tarjeta',
     flex: 0.2,
-    valueGetter: ({row}) => row.paymentMethodId,
+    valueGetter: ({row}) => row.PaymentMethod.name,
   },
 ];

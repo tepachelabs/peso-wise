@@ -20,15 +20,13 @@ import {useExpenses} from '@/views/expenses/hooks/useExpenses';
 import {columns} from '@/views/expenses/columns';
 
 const Expenses = () => {
-  const {expenses} = useExpenses();
+  const {expenses, renewExpenses} = useExpenses();
 
   const [open, setOpen] = useState(false);
 
   const toggleOpen = () => {
     setOpen(!open);
   };
-
-  console.log(expenses);
 
   return (
     <Box>
@@ -48,7 +46,11 @@ const Expenses = () => {
         columns={columns}
         disableSelectionOnClick
       />
-      <AddExpenseDrawer open={open} toggleOpen={toggleOpen} />
+      <AddExpenseDrawer
+        open={open}
+        toggleOpen={toggleOpen}
+        renewExpenses={renewExpenses}
+      />
     </Box>
   );
 };

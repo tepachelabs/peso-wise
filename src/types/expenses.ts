@@ -1,3 +1,11 @@
+import {Card} from '@/types/cards';
+
+export interface ExpenseCreateParams {
+  title: string;
+  amount: number;
+  cardId: string;
+}
+
 export interface Expense {
   id: string;
   title: string;
@@ -5,4 +13,5 @@ export interface Expense {
   currency: string;
   userId: string;
   paymentMethodId: string;
+  PaymentMethod: Card;
 }

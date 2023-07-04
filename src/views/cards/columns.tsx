@@ -1,5 +1,5 @@
 // ** MUI Components
-import {IconButton} from '@mui/material';
+import {Button, IconButton, MenuItem} from '@mui/material';
 
 // ** MUI Icons
 import {Edit, Delete} from '@mui/icons-material';
@@ -7,6 +7,7 @@ import {Edit, Delete} from '@mui/icons-material';
 // ** Type Imports
 import {Card} from '@/types/cards';
 import {GridColDef} from '@mui/x-data-grid';
+import ThreeDotMenu from '@/components/three-dot-menu';
 
 export const columns = (
   toggle: () => void,
@@ -24,24 +25,26 @@ export const columns = (
     headerName: 'Actions',
     flex: 0.3,
     renderCell: ({row}) => (
-      <>
-        <IconButton
-          onClick={() => {
-            toggle();
-            onCardChange(row);
-          }}
-        >
-          <Edit />
-        </IconButton>
-        <IconButton
-          onClick={() => {
-            toggleDelete();
-            onCardChange(row);
-          }}
-        >
-          <Delete />
-        </IconButton>
-      </>
+      <ThreeDotMenu
+        options={[
+          {
+            title: 'Editar',
+            icon: <Edit />,
+            onClick: () => {
+              toggle();
+              onCardChange(row);
+            },
+          },
+          {
+            title: 'Eliminar',
+            icon: <Delete />,
+            onClick: () => {
+              toggleDelete();
+              onCardChange(row);
+            },
+          },
+        ]}
+      />
     ),
   },
 ];
